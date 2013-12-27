@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+<ul>
+	<li><a href="/blog">Blog</a></li>
+	<li><a href="/blog/create">Create Blog Post</a></li>
+</ul>
+
+
+{% block content %}
+
+<div class="row">
+{% if blog_posts.count > 0 %}
+
+	{% for blog_post in blog_posts %}
+
+        <div class="col-lg-8">
+
+        	<h2><a href="/blog/get/{{ blog_post.id}}/">{{ blog_post.title }} </a></h2>
+			<p>{{ blog_post.body|lower|truncatewords:"50" }}</p>
+
+			<p><a class="btn btn-primary" href="{% url 'blog.views.blog_post' blog_post.id %} ">Read More <i class="icon-angle-right"></i></a>
+          <hr></p>
+         </div>
+	{% endfor %}
+
+{% else %}
+
+<div class="col-lg-8">
+	<p>None to show</p>
+</div>
+
+{% endif %}
+
+{% endblock %}
+

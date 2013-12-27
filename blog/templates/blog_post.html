@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+ <ul>
+ 	<li><a href="/articles/all">Articles</a> </li>
+ </ul>
+{% endblock %}
+
+{% block content %}
+
+<div class="col-lg-8">
+
+	<h1>{{ blog_post.title }} </h1>
+	<p>{{ blog_post.body }} </p>
+
+
+	<h2>Comments</h2>
+	{% for c in blog_post.comment_set.all %}
+	<p>{{c.name}}: {{c.body}} </p>
+	{% endfor %}
+
+	<p><a href="/blog/add_comment/{{blog_post.id}}" class="btn btn-primary">Add Comment</a></p>
+</div>
+{% endblock %}
